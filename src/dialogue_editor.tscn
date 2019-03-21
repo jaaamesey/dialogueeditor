@@ -1,0 +1,1600 @@
+[gd_scene load_steps=72 format=2]
+
+[ext_resource path="res://src/dialogue_editor.gd" type="Script" id=1]
+[ext_resource path="res://src/palette_swap.gd" type="Script" id=2]
+[ext_resource path="res://sprites/backgrounds/dottile.png" type="Texture" id=3]
+[ext_resource path="res://fonts/NotoSans-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://src/grid_bg.gd" type="Script" id=5]
+[ext_resource path="res://src/selection_rect.gd" type="Script" id=6]
+[ext_resource path="res://sprites/icons/filled_circle.png" type="Texture" id=7]
+[ext_resource path="res://themes/default_theme.tres" type="Theme" id=8]
+[ext_resource path="res://src/inspector.gd" type="Script" id=9]
+[ext_resource path="res://fx/shaders/blur.tres" type="Material" id=10]
+[ext_resource path="res://fonts/NotoSans-SemiBold.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://sprites/icons/list.png" type="Texture" id=12]
+[ext_resource path="res://sprites/icons/wrench.png" type="Texture" id=13]
+[ext_resource path="res://fonts/UI_18.tres" type="DynamicFont" id=14]
+[ext_resource path="res://fonts/UI_20.tres" type="DynamicFont" id=15]
+[ext_resource path="res://src/project_window.gd" type="Script" id=16]
+[ext_resource path="res://fonts/UI_16.tres" type="DynamicFont" id=17]
+[ext_resource path="res://themes/textedit_darkblue_no_top_margin.tres" type="StyleBox" id=18]
+[ext_resource path="res://fonts/Hack-Regular.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://src/options_window.gd" type="Script" id=20]
+[ext_resource path="res://themes/textedit_darkblue.tres" type="StyleBox" id=21]
+[ext_resource path="res://fonts/UI_default.tres" type="DynamicFont" id=22]
+[ext_resource path="res://src/help_window.gd" type="Script" id=23]
+[ext_resource path="res://fonts/UI_bold_16.tres" type="DynamicFont" id=24]
+[ext_resource path="res://src/find_window.gd" type="Script" id=25]
+[ext_resource path="res://src/spellcheck_window.gd" type="Script" id=26]
+[ext_resource path="res://src/accent_hue_controller.gd" type="Script" id=27]
+[ext_resource path="res://src/tools_menu.gd" type="Script" id=28]
+[ext_resource path="res://themes/popup_menu_stylebox.tres" type="StyleBox" id=29]
+[ext_resource path="res://src/scroll_bar.gd" type="Script" id=30]
+[ext_resource path="res://src/script_mode.gd" type="Script" id=31]
+[ext_resource path="res://fonts/hack_20.tres" type="DynamicFont" id=32]
+[ext_resource path="res://src/background.tscn" type="PackedScene" id=33]
+[ext_resource path="res://sprites/backgrounds/bg1.jpg" type="Texture" id=34]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float amount : hint_range(0,5);
+
+void fragment() {
+
+	COLOR.rgb = textureLod(SCREEN_TEXTURE,SCREEN_UV,amount).rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/amount = 3.4
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 2.0
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG/ColorRect/Dots:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ), Vector2( -29, -49 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="CanvasItemMaterial" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="DynamicFont" id=12]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 11 )
+
+[sub_resource type="StyleBoxEmpty" id=13]
+content_margin_right = 10.0
+content_margin_top = 6.0
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=15]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 19 )
+fallback/0 = ExtResource( 4 )
+
+[sub_resource type="Theme" id=16]
+default_font = ExtResource( 17 )
+
+[sub_resource type="Theme" id=17]
+default_font = ExtResource( 17 )
+
+[sub_resource type="InputEventKey" id=18]
+control = true
+command = true
+scancode = 78
+
+[sub_resource type="ShortCut" id=19]
+shortcut = SubResource( 18 )
+
+[sub_resource type="InputEventKey" id=20]
+control = true
+command = true
+scancode = 79
+
+[sub_resource type="ShortCut" id=21]
+shortcut = SubResource( 20 )
+
+[sub_resource type="Theme" id=22]
+default_font = ExtResource( 17 )
+
+[sub_resource type="InputEventKey" id=23]
+control = true
+command = true
+scancode = 83
+
+[sub_resource type="ShortCut" id=24]
+shortcut = SubResource( 23 )
+
+[sub_resource type="GDScript" id=25]
+script/source = "extends Button
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Save_pressed():
+	pass # Replace with function body.
+"
+
+[sub_resource type="ShortCut" id=26]
+
+[sub_resource type="InputEventKey" id=27]
+control = true
+command = true
+scancode = 70
+
+[sub_resource type="ShortCut" id=28]
+shortcut = SubResource( 27 )
+
+[sub_resource type="GDScript" id=29]
+script/source = "extends Button
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	connect(\"toggled\", self, \"_on_toggled\")
+	pass # Replace with function body.
+
+func _on_toggled(button_pressed):
+
+	pass
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="DynamicFont" id=30]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="InputEventKey" id=31]
+control = true
+command = true
+scancode = 72
+
+[sub_resource type="ShortCut" id=32]
+shortcut = SubResource( 31 )
+
+[sub_resource type="StyleBoxEmpty" id=33]
+
+[sub_resource type="StyleBoxEmpty" id=34]
+
+[sub_resource type="Animation" id=35]
+step = 0.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("FrontWindows/BlackShade:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( -0.0274821, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FrontWindows/BlackShade:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.0490262, 0.114394 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=36]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("InspectorLayer/Inspector:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.0470588 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=37]
+step = 0.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("FrontWindows/BlackShade:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( -0.0123517, 0.146152 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FrontWindows/BlackShade:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00408552, 0.162399 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+
+[node name="DialogueEditor" type="Control"]
+script = ExtResource( 1 )
+
+[node name="PaletteSwap" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="DimmerLayer" type="CanvasLayer" parent="."]
+
+[node name="LoadingDimmer" type="Control" parent="DimmerLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BlurRect" type="ColorRect" parent="DimmerLayer/LoadingDimmer"]
+visible = false
+modulate = Color( 0.701961, 0.917647, 1, 1 )
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -116.0
+margin_top = -72.0
+margin_right = 116.0
+margin_bottom = 71.0
+
+[node name="Dots" type="TextureRect" parent="DimmerLayer/LoadingDimmer"]
+modulate = Color( 1, 1, 1, 0.0196078 )
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1902.0
+margin_top = -1200.0
+margin_right = 13311.0
+margin_bottom = 8402.0
+rect_scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="DimmerLayer/LoadingDimmer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -147.0
+margin_top = -88.0
+margin_right = 146.0
+margin_bottom = 88.0
+color = Color( 0, 0, 0, 0.423529 )
+
+[node name="StopperButton" type="Button" parent="DimmerLayer/LoadingDimmer/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 41.8542
+margin_top = 6.69135
+margin_right = 41.8542
+margin_bottom = 6.69135
+flat = true
+
+[node name="Label" type="Label" parent="DimmerLayer/LoadingDimmer"]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 50.1965
+margin_top = -97.5867
+margin_right = 1019.2
+margin_bottom = -52.5867
+custom_fonts/font = SubResource( 4 )
+text = "Loading..."
+
+[node name="Map" type="Control" parent="."]
+
+[node name="GridBG" type="Node2D" parent="Map"]
+script = ExtResource( 5 )
+
+[node name="Blocks" type="YSort" parent="Map"]
+sort_enabled = false
+
+[node name="SelectionRect" type="Node2D" parent="Map"]
+script = ExtResource( 6 )
+
+[node name="Cursor" type="Node2D" parent="Map"]
+
+[node name="Sprite" type="Sprite" parent="Map/Cursor"]
+visible = false
+scale = Vector2( 0.0415137, 0.0415137 )
+texture = ExtResource( 7 )
+
+[node name="CursorArea" type="Area2D" parent="Map/Cursor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Cursor/CursorArea"]
+shape = SubResource( 5 )
+
+[node name="InspectorLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
+layer = 3
+
+[node name="Inspector" type="Panel" parent="InspectorLayer"]
+self_modulate = Color( 0, 0, 0, 0 )
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -429.0
+margin_top = 35.0
+focus_mode = 1
+theme = ExtResource( 8 )
+script = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InspectorLayer/Inspector"]
+autoplay = "MovingDots"
+anims/MovingDots = SubResource( 6 )
+
+[node name="BG" type="Control" parent="InspectorLayer/Inspector"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_right = 7.0
+
+[node name="StopperButton" type="Button" parent="InspectorLayer/Inspector/BG"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 411.0
+custom_styles/focus = SubResource( 7 )
+
+[node name="ColorRect2" type="ColorRect" parent="InspectorLayer/Inspector/BG"]
+visible = false
+modulate = Color( 1, 1, 1, 0.231373 )
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 419.0
+margin_right = -5.0
+color = Color( 1, 17.87, 16.67, 1 )
+
+[node name="BlurRect" type="ColorRect" parent="InspectorLayer/Inspector/BG"]
+modulate = Color( 0.701961, 0.917647, 1, 1 )
+material = ExtResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="InspectorLayer/Inspector/BG"]
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+color = Color( 0, 0.027451, 0.0784314, 0.654902 )
+
+[node name="Dots" type="TextureRect" parent="InspectorLayer/Inspector/BG/ColorRect"]
+modulate = Color( 1, 1, 1, 0.0196078 )
+material = SubResource( 3 )
+margin_left = -12.0
+margin_top = -19.0
+margin_right = 3886.0
+margin_bottom = 4325.0
+rect_scale = Vector2( 0.25, 0.25 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+
+[node name="Line" type="ColorRect" parent="InspectorLayer/Inspector/BG"]
+anchor_bottom = 1.0
+margin_left = -2.0
+color = Color( 0, 0, 0, 0.843137 )
+
+[node name="Name" type="Control" parent="InspectorLayer/Inspector"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 3.0
+margin_right = 20.0
+margin_bottom = 40.0
+
+[node name="Label" type="LineEdit" parent="InspectorLayer/Inspector/Name"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -170.0
+margin_right = 169.0
+margin_bottom = 36.0
+custom_styles/read_only = SubResource( 9 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color_selected = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "EMPTY"
+align = 1
+max_length = 10
+context_menu_enabled = false
+
+[node name="Underline" type="ColorRect" parent="InspectorLayer/Inspector/Name"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -60.0
+margin_top = 37.0
+margin_right = 59.0
+margin_bottom = 39.0
+color = Color( 1, 1, 1, 0.545098 )
+
+[node name="ActionsModeButton" type="TextureButton" parent="InspectorLayer/Inspector"]
+visible = false
+margin_left = 378.0
+margin_top = 9.0
+margin_right = 409.0
+margin_bottom = 40.0
+toggle_mode = true
+action_mode = 0
+button_mask = 5
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 13 )
+expand = true
+
+[node name="DialogueBoxContainer" type="ScrollContainer" parent="InspectorLayer/Inspector"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 47.0
+margin_right = -2.0
+margin_bottom = -9.0
+mouse_filter = 2
+custom_styles/bg = SubResource( 13 )
+scroll_horizontal_enabled = false
+
+[node name="Control" type="Control" parent="InspectorLayer/Inspector/DialogueBoxContainer"]
+margin_top = 6.0
+margin_bottom = 6.0
+
+[node name="PropertiesVBox" type="VBoxContainer" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control"]
+margin_right = 405.0
+margin_bottom = 188.0
+mouse_filter = 0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="InfoText" type="RichTextLabel" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control/PropertiesVBox"]
+margin_right = 405.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 0, 110 )
+focus_mode = 2
+custom_fonts/normal_font = ExtResource( 14 )
+bbcode_enabled = true
+bbcode_text = "<INFO TEXT>"
+text = "<INFO TEXT>"
+selection_enabled = true
+
+[node name="CustomAttributeSeparator" type="VSeparator" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control/PropertiesVBox"]
+visible = false
+margin_top = 100.0
+margin_right = 405.0
+margin_bottom = 103.0
+custom_styles/separator = SubResource( 14 )
+
+[node name="CustomAttributeTemplate" type="HBoxContainer" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control/PropertiesVBox"]
+margin_top = 120.0
+margin_right = 405.0
+margin_bottom = 147.0
+
+[node name="Label" type="Label" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control/PropertiesVBox/CustomAttributeTemplate"]
+margin_right = 221.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 14 )
+text = "Special Flag"
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control/PropertiesVBox/CustomAttributeTemplate"]
+margin_left = 225.0
+margin_right = 405.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 180, 0 )
+context_menu_enabled = false
+clear_button_enabled = true
+caret_blink = true
+
+[node name="ActionsVBox" type="VBoxContainer" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control"]
+visible = false
+margin_top = 6.0
+margin_right = 410.0
+margin_bottom = 88.0
+custom_constants/separation = 14
+
+[node name="ViewConnections" type="Button" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control/ActionsVBox"]
+margin_right = 410.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 400, 0 )
+text = "View Connections"
+
+[node name="ViewChainAsScript" type="Button" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control/ActionsVBox"]
+margin_top = 48.0
+margin_right = 410.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 400, 0 )
+text = "View Chain as Script"
+
+[node name="GoToEndOfChain" type="Button" parent="InspectorLayer/Inspector/DialogueBoxContainer/Control/ActionsVBox"]
+margin_top = 96.0
+margin_right = 410.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 400, 0 )
+text = "Go to End of Chain"
+
+[node name="EmptyContainer" type="ScrollContainer" parent="InspectorLayer/Inspector"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 47.0
+margin_right = -2.0
+margin_bottom = -9.0
+mouse_filter = 2
+custom_styles/bg = SubResource( 13 )
+scroll_horizontal_enabled = false
+
+[node name="Label" type="Label" parent="InspectorLayer/Inspector/EmptyContainer"]
+margin_top = 6.0
+margin_right = 232.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "No properties to display. "
+align = 1
+
+[node name="FrontWindows" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="GenericPopupMessage" type="AcceptDialog" parent="FrontWindows"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -201.0
+margin_top = -118.0
+margin_right = 204.0
+margin_bottom = 119.0
+theme = ExtResource( 8 )
+window_title = ""
+resizable = true
+
+[node name="Control" type="Control" parent="FrontWindows/GenericPopupMessage"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -50.0
+rect_clip_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FrontWindows/GenericPopupMessage/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 17.0
+margin_top = 13.0
+margin_right = -18.0
+margin_bottom = -47.0
+focus_mode = 2
+bbcode_enabled = true
+selection_enabled = true
+
+[node name="BlackShade" type="Control" parent="FrontWindows"]
+visible = false
+modulate = Color( 1, 1, 1, 0.384573 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="FrontWindows/BlackShade"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 36.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.564706 )
+
+[node name="ProjectWindow" type="Control" parent="FrontWindows"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+theme = ExtResource( 8 )
+script = ExtResource( 16 )
+
+[node name="Panel" type="WindowDialog" parent="FrontWindows/ProjectWindow"]
+editor/display_folded = true
+margin_left = -188.0
+margin_top = -177.0
+margin_right = 283.0
+margin_bottom = 217.0
+theme = ExtResource( 8 )
+window_title = "Project Settings"
+
+[node name="GridContainer" type="GridContainer" parent="FrontWindows/ProjectWindow/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 19.0
+margin_top = 18.0
+margin_right = -19.0
+margin_bottom = -11.0
+columns = 2
+
+[node name="DBoxStyleLabel" type="Label" parent="FrontWindows/ProjectWindow/Panel/GridContainer"]
+margin_top = 3.0
+margin_right = 239.0
+margin_bottom = 26.0
+hint_tooltip = "The style of dialogue box the project will use (effective for all new dialogue blocks or on file reload)"
+size_flags_horizontal = 3
+text = "Dialogue Box Style"
+
+[node name="DBoxStyleSelect" type="OptionButton" parent="FrontWindows/ProjectWindow/Panel/GridContainer"]
+margin_left = 243.0
+margin_right = 433.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 150, 30 )
+custom_fonts/font = ExtResource( 17 )
+text = "Black Serif"
+align = 1
+items = [ "Custom", null, true, -1, null, "Black Serif", null, false, -1, null, "Jangnanmon", null, false, -1, null, "Cactus", null, false, -1, null ]
+selected = 1
+
+[node name="AuthorLabel" type="Label" parent="FrontWindows/ProjectWindow/Panel/GridContainer"]
+margin_top = 37.0
+margin_right = 239.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+text = "Author"
+
+[node name="AuthorField" type="LineEdit" parent="FrontWindows/ProjectWindow/Panel/GridContainer"]
+margin_left = 243.0
+margin_top = 34.0
+margin_right = 433.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 190, 30 )
+custom_styles/normal = ExtResource( 18 )
+max_length = 50
+caret_blink = true
+
+[node name="DescriptionLabel" type="Label" parent="FrontWindows/ProjectWindow/Panel/GridContainer"]
+margin_top = 71.0
+margin_right = 239.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+text = "Description"
+
+[node name="DescriptionField" type="LineEdit" parent="FrontWindows/ProjectWindow/Panel/GridContainer"]
+margin_left = 243.0
+margin_top = 68.0
+margin_right = 433.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 190, 30 )
+custom_styles/normal = ExtResource( 18 )
+max_length = 50
+caret_blink = true
+
+[node name="CustomBlockAttributesLabel" type="Label" parent="FrontWindows/ProjectWindow/Panel"]
+margin_left = 19.0
+margin_top = 197.0
+margin_right = 258.0
+margin_bottom = 220.0
+size_flags_horizontal = 3
+text = "Custom Block Attributes"
+
+[node name="CustomBlockAttributesTextEdit" type="TextEdit" parent="FrontWindows/ProjectWindow/Panel"]
+margin_left = 19.0
+margin_top = 231.0
+margin_right = 350.0
+margin_bottom = 351.0
+rect_min_size = Vector2( 0, 120 )
+custom_fonts/font = SubResource( 15 )
+custom_colors/current_line_color = Color( 1, 1, 1, 0.0470588 )
+highlight_current_line = true
+show_line_numbers = true
+context_menu_enabled = false
+caret_blink = true
+
+[node name="OptionsWindow" type="WindowDialog" parent="FrontWindows"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -355.0
+margin_top = -203.0
+margin_right = 263.0
+margin_bottom = 203.0
+theme = ExtResource( 8 )
+window_title = "Options"
+script = ExtResource( 20 )
+
+[node name="ItemList" type="ItemList" parent="FrontWindows/OptionsWindow"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 10.0
+margin_right = -466.0
+margin_bottom = -23.0
+custom_styles/bg = ExtResource( 21 )
+items = [ "General", null, false, "Spellcheck", null, false ]
+allow_reselect = true
+
+[node name="General" type="GridContainer" parent="FrontWindows/OptionsWindow"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -446.813
+margin_top = 10.5
+margin_right = -19.8129
+margin_bottom = 395.5
+custom_constants/vseparation = 10
+columns = 2
+
+[node name="ScrollSpeedLabel" type="Label" parent="FrontWindows/OptionsWindow/General"]
+margin_right = 223.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 0, 34 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Scroll Speed:"
+valign = 1
+
+[node name="ScrollSpeedSlider" type="HSlider" parent="FrontWindows/OptionsWindow/General"]
+margin_left = 227.0
+margin_right = 427.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 200, 0 )
+focus_mode = 0
+size_flags_vertical = 1
+max_value = 1000.0
+step = 10.0
+value = 100.0
+rounded = true
+ticks_on_borders = true
+focus_mode = 0
+
+[node name="ZoomSpeedLabel" type="Label" parent="FrontWindows/OptionsWindow/General"]
+margin_top = 44.0
+margin_right = 223.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 0, 34 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Zoom Speed:"
+valign = 1
+
+[node name="ZoomSpeedSlider" type="HSlider" parent="FrontWindows/OptionsWindow/General"]
+margin_left = 227.0
+margin_top = 44.0
+margin_right = 427.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 200, 0 )
+focus_mode = 0
+size_flags_vertical = 1
+min_value = 1.0
+max_value = 2.0
+step = 0.1
+value = 1.2
+exp_edit = true
+ticks_on_borders = true
+focus_mode = 0
+
+[node name="EditorBackgroundLabel" type="Label" parent="FrontWindows/OptionsWindow/General"]
+margin_top = 88.0
+margin_right = 223.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 0, 34 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Editor Background:"
+valign = 1
+
+[node name="EditorBackgroundSelect" type="OptionButton" parent="FrontWindows/OptionsWindow/General"]
+margin_left = 227.0
+margin_top = 88.0
+margin_right = 427.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 0, 10 )
+text = "bg1"
+items = [ "bg1", null, false, -1, null, "bg2", null, false, -1, null, "bg3", null, false, -1, null, "bg4", null, false, -1, null ]
+selected = 0
+
+[node name="LowProcessorMode" type="CheckBox" parent="FrontWindows/OptionsWindow/General"]
+margin_top = 132.0
+margin_right = 223.0
+margin_bottom = 163.0
+rect_min_size = Vector2( 200, 0 )
+focus_mode = 0
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+pressed = true
+text = "Low Processor Mode"
+align = 1
+
+[node name="DisableAnimations" type="CheckBox" parent="FrontWindows/OptionsWindow/General"]
+margin_left = 227.0
+margin_top = 132.0
+margin_right = 427.0
+margin_bottom = 163.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Disable Animations"
+align = 1
+
+[node name="EnableVSync" type="CheckBox" parent="FrontWindows/OptionsWindow/General"]
+margin_top = 173.0
+margin_right = 223.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Enable VSync"
+align = 1
+
+[node name="MuteSound" type="CheckBox" parent="FrontWindows/OptionsWindow/General"]
+visible = false
+margin_left = 227.0
+margin_top = 173.0
+margin_right = 427.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Mute Sound"
+align = 1
+
+[node name="MoveBlocksAsChain" type="CheckBox" parent="FrontWindows/OptionsWindow/General"]
+margin_top = 214.0
+margin_right = 223.0
+margin_bottom = 245.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Move Blocks As Chain"
+align = 1
+
+[node name="Control" type="Control" parent="FrontWindows/OptionsWindow/General"]
+margin_left = 227.0
+margin_top = 214.0
+margin_right = 427.0
+margin_bottom = 245.0
+
+[node name="Spellcheck" type="GridContainer" parent="FrontWindows/OptionsWindow"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -447.0
+margin_top = 11.0
+margin_right = -20.0
+margin_bottom = 373.0
+custom_constants/vseparation = 10
+columns = 2
+
+[node name="Enabled" type="Label" parent="FrontWindows/OptionsWindow/Spellcheck"]
+margin_top = 3.0
+margin_right = 347.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 0, 34 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Realtime Spellcheck Enabled"
+valign = 1
+
+[node name="RealtimeSpellcheckEnabled" type="CheckButton" parent="FrontWindows/OptionsWindow/Spellcheck"]
+margin_left = 351.0
+margin_right = 427.0
+margin_bottom = 40.0
+pressed = true
+
+[node name="IgnoredWordsLabel" type="Label" parent="FrontWindows/OptionsWindow/Spellcheck"]
+margin_top = 50.0
+margin_right = 347.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 34 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 22 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Ignored Words"
+valign = 1
+
+[node name="Control2" type="Control" parent="FrontWindows/OptionsWindow/Spellcheck"]
+margin_left = 351.0
+margin_top = 50.0
+margin_right = 427.0
+margin_bottom = 84.0
+
+[node name="IgnoredWords" type="TextEdit" parent="FrontWindows/OptionsWindow/Spellcheck"]
+margin_top = 94.0
+margin_right = 347.0
+margin_bottom = 372.0
+rect_min_size = Vector2( 175.74, 278 )
+size_flags_vertical = 2
+show_line_numbers = true
+
+[node name="HelpWindow" type="AcceptDialog" parent="FrontWindows"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -212.0
+margin_top = -203.0
+margin_right = 212.0
+margin_bottom = 254.0
+rect_min_size = Vector2( 200, 200 )
+theme = ExtResource( 8 )
+window_title = "Help"
+resizable = true
+script = ExtResource( 23 )
+
+[node name="Control" type="Control" parent="FrontWindows/HelpWindow"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -50.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FrontWindows/HelpWindow/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = -9.0
+margin_bottom = 19.0
+custom_fonts/bold_font = ExtResource( 24 )
+bbcode_enabled = true
+bbcode_text = "[b][u]MOVING THE CAMERA[/u] [/b]
+[b]Pan Camera: [/b]Right Click / Alt + Click
+[b]Zoom Camera: [/b]Ctrl + Scroll / Right Click + Scroll
+
+[b][u]CREATING BLOCKS [/u] [/b]
+[b]Dialogue Block: [/b]Double Click / Ctrl + Click
+[b]Branch Block: [/b]B + Click
+[b]Comment Block: [/b]C + Click
+[b]Title Block: [/b]T + Click
+
+[b][u]MISCELLANEOUS[/u] [/b]
+[b]Show Inspector: [/b]I / E
+[b]Continue Dialogue Chain: [/b]Ctrl + Enter (in text field) (you can also double click the connector)
+[b]Move Blocks As Chain: [/b]Hold shift whilst dragging top block (in text field)"
+text = "MOVING THE CAMERA 
+Pan Camera: Right Click / Alt + Click
+Zoom Camera: Ctrl + Scroll / Right Click + Scroll
+
+CREATING BLOCKS  
+Dialogue Block: Double Click / Ctrl + Click
+Branch Block: B + Click
+Comment Block: C + Click
+Title Block: T + Click
+
+MISCELLANEOUS 
+Show Inspector: I / E
+Continue Dialogue Chain: Ctrl + Enter (in text field) (you can also double click the connector)
+Move Blocks As Chain: Hold shift whilst dragging top block (in text field)"
+
+[node name="FindWindow" type="WindowDialog" parent="FrontWindows"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -255.0
+margin_top = -217.0
+margin_right = 273.0
+margin_bottom = 181.0
+rect_min_size = Vector2( 270, 305 )
+theme = ExtResource( 8 )
+window_title = "Find"
+resizable = true
+script = ExtResource( 25 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FrontWindows/FindWindow"]
+margin_left = 12.8334
+margin_top = 14.3734
+margin_right = 215.833
+margin_bottom = 54.3734
+rect_clip_content = true
+theme = SubResource( 16 )
+custom_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FrontWindows/FindWindow/VBoxContainer"]
+margin_right = 233.0
+margin_bottom = 27.0
+
+[node name="Label" type="Label" parent="FrontWindows/FindWindow/VBoxContainer/HBoxContainer"]
+margin_top = 2.0
+margin_right = 70.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 70, 0 )
+custom_fonts/font = ExtResource( 17 )
+text = "Find: "
+
+[node name="FindLineEdit" type="LineEdit" parent="FrontWindows/FindWindow/VBoxContainer/HBoxContainer"]
+margin_left = 74.0
+margin_right = 233.32
+margin_bottom = 27.0
+rect_min_size = Vector2( 159.32, 0 )
+size_flags_vertical = 4
+theme = ExtResource( 8 )
+clear_button_enabled = true
+caret_blink = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="FrontWindows/FindWindow/VBoxContainer"]
+visible = false
+margin_top = 37.0
+margin_right = 261.0
+margin_bottom = 68.0
+
+[node name="Label" type="Label" parent="FrontWindows/FindWindow/VBoxContainer/HBoxContainer2"]
+margin_top = 4.0
+margin_right = 70.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 70, 0 )
+custom_fonts/font = ExtResource( 17 )
+text = "Replace: "
+
+[node name="ReplaceLineEdit" type="LineEdit" parent="FrontWindows/FindWindow/VBoxContainer/HBoxContainer2"]
+margin_left = 74.0
+margin_top = 2.0
+margin_right = 233.32
+margin_bottom = 29.0
+rect_min_size = Vector2( 159.32, 0 )
+size_flags_vertical = 4
+theme = ExtResource( 8 )
+clear_button_enabled = true
+caret_blink = true
+
+[node name="ReplaceCheckBox" type="CheckBox" parent="FrontWindows/FindWindow/VBoxContainer/HBoxContainer2"]
+margin_left = 237.0
+margin_right = 261.0
+margin_bottom = 31.0
+
+[node name="MiscGridContainer" type="GridContainer" parent="FrontWindows/FindWindow/VBoxContainer"]
+margin_top = 37.0
+margin_right = 233.0
+margin_bottom = 68.0
+theme = SubResource( 17 )
+columns = 2
+
+[node name="CaseSensitiveCheckBox" type="CheckBox" parent="FrontWindows/FindWindow/VBoxContainer/MiscGridContainer"]
+margin_right = 133.0
+margin_bottom = 31.0
+text = "Case-sensitive"
+
+[node name="CheckBox2" type="CheckBox" parent="FrontWindows/FindWindow/VBoxContainer/MiscGridContainer"]
+visible = false
+margin_left = 137.0
+margin_right = 209.0
+margin_bottom = 31.0
+text = "RegEx"
+
+[node name="Label" type="Label" parent="FrontWindows/FindWindow/VBoxContainer"]
+margin_top = 78.0
+margin_right = 233.0
+margin_bottom = 101.0
+text = "Match:"
+
+[node name="MatchGridContainer" type="GridContainer" parent="FrontWindows/FindWindow/VBoxContainer"]
+margin_top = 111.0
+margin_right = 233.0
+margin_bottom = 177.0
+theme = SubResource( 17 )
+columns = 2
+
+[node name="Text" type="CheckBox" parent="FrontWindows/FindWindow/VBoxContainer/MatchGridContainer"]
+margin_right = 101.0
+margin_bottom = 31.0
+pressed = true
+text = "Text"
+
+[node name="ID" type="CheckBox" parent="FrontWindows/FindWindow/VBoxContainer/MatchGridContainer"]
+margin_left = 105.0
+margin_right = 148.0
+margin_bottom = 31.0
+pressed = true
+text = "ID"
+
+[node name="Character" type="CheckBox" parent="FrontWindows/FindWindow/VBoxContainer/MatchGridContainer"]
+margin_top = 35.0
+margin_right = 101.0
+margin_bottom = 66.0
+pressed = true
+text = "Character"
+
+[node name="Label2" type="Label" parent="FrontWindows/FindWindow/VBoxContainer"]
+margin_top = 187.0
+margin_right = 233.0
+margin_bottom = 210.0
+text = "Include:"
+
+[node name="IncludeGridContainer" type="GridContainer" parent="FrontWindows/FindWindow/VBoxContainer"]
+editor/display_folded = true
+margin_top = 220.0
+margin_right = 233.0
+margin_bottom = 286.0
+theme = SubResource( 17 )
+columns = 2
+
+[node name="CheckBox2" type="CheckBox" parent="FrontWindows/FindWindow/VBoxContainer/IncludeGridContainer"]
+margin_right = 109.0
+margin_bottom = 31.0
+pressed = true
+text = "Dialogue"
+
+[node name="CheckBox3" type="CheckBox" parent="FrontWindows/FindWindow/VBoxContainer/IncludeGridContainer"]
+margin_left = 113.0
+margin_right = 179.0
+margin_bottom = 31.0
+text = "Titles"
+
+[node name="CheckBox4" type="CheckBox" parent="FrontWindows/FindWindow/VBoxContainer/IncludeGridContainer"]
+margin_top = 35.0
+margin_right = 109.0
+margin_bottom = 66.0
+text = "Comments"
+
+[node name="ItemList" type="ItemList" parent="FrontWindows/FindWindow"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 307.0
+margin_top = 12.0
+margin_right = -13.0
+margin_bottom = -38.0
+theme = ExtResource( 8 )
+custom_styles/bg = ExtResource( 21 )
+allow_reselect = true
+
+[node name="RefineCheckbox" type="CheckBox" parent="FrontWindows/FindWindow"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -216.124
+margin_top = -36.5688
+margin_right = -13.124
+margin_bottom = -0.568787
+custom_fonts/font = ExtResource( 17 )
+disabled = true
+text = "Refine Previous Search"
+
+[node name="SearchButton" type="Button" parent="FrontWindows/FindWindow"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 12.875
+margin_top = -43.7534
+margin_right = 132.875
+margin_bottom = -9.75342
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 0
+custom_fonts/font = ExtResource( 17 )
+text = "Search"
+
+[node name="SearchCountLabel" type="Label" parent="FrontWindows/FindWindow"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 146.296
+margin_top = -39.2443
+margin_right = 349.296
+margin_bottom = -16.2443
+text = "Found 0 matches."
+
+[node name="SpellCheckWindow" type="WindowDialog" parent="FrontWindows"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -183.0
+margin_top = -217.0
+margin_right = 201.0
+margin_bottom = 181.0
+rect_min_size = Vector2( 270, 305 )
+theme = ExtResource( 8 )
+window_title = "Spellcheck"
+resizable = true
+script = ExtResource( 26 )
+
+[node name="ItemList" type="ItemList" parent="FrontWindows/SpellCheckWindow"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = -13.0
+margin_bottom = -50.0
+theme = ExtResource( 8 )
+custom_styles/bg = ExtResource( 21 )
+allow_reselect = true
+max_text_lines = 2
+
+[node name="CheckButton" type="Button" parent="FrontWindows/SpellCheckWindow"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -130.979
+margin_top = -40.4581
+margin_right = -10.9788
+margin_bottom = -6.45813
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 0
+custom_fonts/font = ExtResource( 17 )
+text = "Refresh"
+
+[node name="ErrorCountLabel" type="Label" parent="FrontWindows/SpellCheckWindow"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -350.245
+margin_top = -34.6246
+margin_right = -147.245
+margin_bottom = -11.6246
+text = "Found 0 errors."
+align = 2
+
+[node name="OpenFileWindow" type="FileDialog" parent="FrontWindows"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -503.0
+margin_top = -281.0
+margin_right = 506.0
+margin_bottom = 313.0
+theme = ExtResource( 8 )
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.poopliga" )
+current_dir = "C:/Users/Jamie/Desktop/poopliga"
+current_path = "C:/Users/Jamie/Desktop/poopliga/"
+
+[node name="FrontUILayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRectBG2" type="ColorRect" parent="FrontUILayer"]
+anchor_right = 1.0
+margin_bottom = 36.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="AccentLine" type="ColorRect" parent="FrontUILayer"]
+anchor_right = 1.0
+margin_bottom = 35.0
+color = Color( 0.117647, 0.490196, 0.65098, 1 )
+script = ExtResource( 27 )
+
+[node name="ColorRect" type="ColorRect" parent="FrontUILayer"]
+anchor_right = 1.0
+margin_bottom = 33.0
+color = Color( 0.00335693, 0.029139, 0.078125, 1 )
+
+[node name="LeftHBoxContainer" type="HBoxContainer" parent="FrontUILayer"]
+anchor_right = 0.63
+margin_left = 7.0
+margin_top = 1.0
+margin_right = -314.0
+margin_bottom = 33.0
+
+[node name="New" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+margin_right = 46.0
+margin_bottom = 32.0
+hint_tooltip = "Creates a new empty file."
+focus_mode = 0
+custom_fonts/font = ExtResource( 17 )
+enabled_focus_mode = 0
+shortcut = SubResource( 19 )
+text = "New"
+flat = true
+
+[node name="Open" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+margin_left = 50.0
+margin_right = 104.0
+margin_bottom = 32.0
+hint_tooltip = "Opens a previously saved file."
+focus_mode = 0
+custom_fonts/font = ExtResource( 17 )
+enabled_focus_mode = 0
+shortcut = SubResource( 21 )
+text = "Open"
+flat = true
+
+[node name="Save" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+margin_left = 108.0
+margin_right = 155.0
+margin_bottom = 32.0
+hint_tooltip = "Saves the current file to disk."
+focus_mode = 0
+theme = SubResource( 22 )
+enabled_focus_mode = 0
+shortcut = SubResource( 24 )
+text = "Save"
+flat = true
+script = SubResource( 25 )
+
+[node name="SaveAs" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+visible = false
+margin_left = 159.0
+margin_right = 227.0
+margin_bottom = 32.0
+hint_tooltip = "Saves the current file to a specified location."
+focus_mode = 0
+custom_fonts/font = ExtResource( 17 )
+enabled_focus_mode = 0
+shortcut = SubResource( 26 )
+text = "Save as"
+flat = true
+
+[node name="Find" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+margin_left = 159.0
+margin_right = 203.0
+margin_bottom = 32.0
+hint_tooltip = "Searches for a specific block."
+focus_mode = 0
+custom_fonts/font = ExtResource( 17 )
+enabled_focus_mode = 0
+shortcut = SubResource( 28 )
+text = "Find"
+flat = true
+
+[node name="Project" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+margin_left = 207.0
+margin_right = 273.0
+margin_bottom = 32.0
+hint_tooltip = "Opens project settings."
+focus_mode = 0
+custom_fonts/font = ExtResource( 17 )
+enabled_focus_mode = 0
+text = "Project"
+flat = true
+
+[node name="Options" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+margin_left = 277.0
+margin_right = 350.0
+margin_bottom = 32.0
+hint_tooltip = "Opens the options menu."
+focus_mode = 0
+custom_fonts/font = ExtResource( 17 )
+enabled_focus_mode = 0
+text = "Options"
+flat = true
+script = SubResource( 29 )
+
+[node name="Inspector" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+margin_left = 354.0
+margin_right = 439.0
+margin_bottom = 32.0
+hint_tooltip = "(E / I)
+Opens the Inspector. "
+focus_mode = 0
+custom_fonts/font = ExtResource( 17 )
+enabled_focus_mode = 0
+text = "Inspector"
+flat = true
+
+[node name="Tools" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+margin_left = 443.0
+margin_right = 496.0
+margin_bottom = 32.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 17 )
+enabled_focus_mode = 0
+text = "Tools"
+flat = true
+script = ExtResource( 28 )
+
+[node name="PopupMenu" type="PopupMenu" parent="FrontUILayer/LeftHBoxContainer/Tools"]
+margin_top = 36.0
+margin_right = 108.0
+margin_bottom = 86.0
+custom_styles/panel = ExtResource( 29 )
+custom_fonts/font = SubResource( 30 )
+items = [ "Spellcheck", null, 0, false, false, 0, 0, null, "", false, "Import", null, 0, false, true, 1, 0, null, "", false ]
+
+[node name="Help" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+margin_left = 500.0
+margin_right = 547.0
+margin_bottom = 32.0
+hint_tooltip = "Opens the help menu."
+focus_mode = 0
+custom_fonts/font = ExtResource( 17 )
+enabled_focus_mode = 0
+shortcut = SubResource( 32 )
+text = "Help"
+flat = true
+
+[node name="VScrollBar" type="VScrollBar" parent="FrontUILayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -12.0
+margin_top = 36.0
+focus_mode = 2
+theme = ExtResource( 8 )
+max_value = 2000.0
+page = 1200.0
+rounded = true
+script = ExtResource( 30 )
+
+[node name="Label" type="Label" parent="FrontUILayer/VScrollBar"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -342.0
+margin_top = -53.0
+margin_right = -31.0
+margin_bottom = -17.0
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "(0,0)"
+align = 2
+
+[node name="Message" type="RichTextLabel" parent="FrontUILayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = -90.0
+margin_right = 869.0
+margin_bottom = -58.0
+custom_fonts/normal_font = ExtResource( 15 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 2
+bbcode_enabled = true
+scroll_active = false
+
+[node name="ScriptModeLayer" type="CanvasLayer" parent="."]
+
+[node name="ScriptMode" type="Control" parent="ScriptModeLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 31 )
+
+[node name="ColorRect" type="ColorRect" parent="ScriptModeLayer/ScriptMode"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextEdit" type="TextEdit" parent="ScriptModeLayer/ScriptMode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -345.0
+margin_top = -281.5
+margin_right = 345.0
+margin_bottom = 281.5
+custom_styles/focus = SubResource( 33 )
+custom_styles/normal = SubResource( 34 )
+custom_fonts/font = ExtResource( 32 )
+custom_colors/caret_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/current_line_color = Color( 0.941176, 0.941176, 0.941176, 1 )
+highlight_current_line = true
+show_line_numbers = true
+context_menu_enabled = false
+wrap_enabled = true
+caret_blink = true
+
+[node name="BackUILayer" type="CanvasLayer" parent="."]
+layer = -99
+
+[node name="BackUIButton" type="Button" parent="BackUILayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -47.0
+margin_right = 78.0
+margin_bottom = 58.0
+theme = ExtResource( 8 )
+action_mode = 0
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BGLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Background" parent="BGLayer" instance=ExtResource( 33 )]
+modulate = Color( 1, 1, 1, 1 )
+texture = ExtResource( 34 )
+
+[node name="Control" type="Control" parent="."]
+margin_top = -1.0
+margin_right = 40.0
+margin_bottom = 39.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "UnblackenScreen"
+anims/BlackenScreen = SubResource( 35 )
+anims/InspectorOpen = SubResource( 36 )
+anims/UnblackenScreen = SubResource( 37 )
+
+[node name="Node" type="Node" parent="."]
+
+[connection signal="area_entered" from="Map/Cursor/CursorArea" to="." method="_on_CursorArea_area_entered"]
+[connection signal="area_exited" from="Map/Cursor/CursorArea" to="." method="_on_CursorArea_area_exited"]
+[connection signal="visibility_changed" from="InspectorLayer/Inspector" to="InspectorLayer/Inspector" method="_on_Inspector_visibility_changed"]
+[connection signal="pressed" from="InspectorLayer/Inspector/DialogueBoxContainer/Control/ActionsVBox/ViewConnections" to="InspectorLayer/Inspector" method="_on_ViewConnections_pressed"]
+[connection signal="pressed" from="InspectorLayer/Inspector/DialogueBoxContainer/Control/ActionsVBox/ViewChainAsScript" to="InspectorLayer/Inspector" method="_on_ViewChainAsScript_pressed"]
+[connection signal="pressed" from="InspectorLayer/Inspector/DialogueBoxContainer/Control/ActionsVBox/GoToEndOfChain" to="InspectorLayer/Inspector" method="_on_GoToEndOfChain_pressed"]
+[connection signal="item_selected" from="FrontWindows/OptionsWindow/ItemList" to="FrontWindows/OptionsWindow" method="_on_ItemList_item_selected"]
+[connection signal="file_selected" from="FrontWindows/OpenFileWindow" to="." method="_on_OpenFileWindow_file_selected"]
+[connection signal="popup_hide" from="FrontWindows/OpenFileWindow" to="." method="_on_OpenFileWindow_popup_hide"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Open" to="." method="_on_Open_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Save" to="FrontUILayer/LeftHBoxContainer/Save" method="_on_Save_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Find" to="FrontWindows/FindWindow" method="_on_Find_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Project" to="FrontWindows/ProjectWindow" method="_on_Project_pressed"]
+[connection signal="toggled" from="FrontUILayer/LeftHBoxContainer/Project" to="FrontWindows/ProjectWindow" method="_on_Project_toggled"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Options" to="FrontWindows/OptionsWindow" method="_on_Options_pressed"]
+[connection signal="toggled" from="FrontUILayer/LeftHBoxContainer/Options" to="FrontWindows/OptionsWindow" method="_on_Options_toggled"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Inspector" to="." method="_on_Inspector_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Help" to="FrontWindows/HelpWindow" method="_on_Help_pressed"]
+[connection signal="pressed" from="BackUILayer/BackUIButton" to="." method="_on_BackUIButton_pressed"]

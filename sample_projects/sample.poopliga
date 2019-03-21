@@ -1,0 +1,425 @@
+{
+  "__META__*****": {
+    "key": "__META__*****",
+    "type": 0,
+    "text": "",
+    "char": "",
+    "tail": "",
+    "posx": 0,
+    "posy": 0,
+    "data": {
+      "project_settings": {
+        "dialogue_box_style": 3,
+        "author": "",
+        "description": "",
+        "custom_block_attributes": "Character Portrait\nBackground\nMusic\nCommand"
+      },
+      "last_saved": {
+        "year": 2019,
+        "month": 3,
+        "day": 1,
+        "weekday": 5,
+        "dst": false,
+        "hour": 19,
+        "minute": 52,
+        "second": 39
+      },
+      "last_camera_pos": "(137.78418, 5723.600586)"
+    }
+  },
+  "c_c411135e": {
+    "key": "c_c411135e",
+    "type": 3,
+    "text": "This is a sample project meant to show off the (limited) capabilities of this editor.",
+    "char": "",
+    "tail": "",
+    "posx": -322,
+    "posy": -333,
+    "data": {
+
+    }
+  },
+  "821b9c589b": {
+    "key": "821b9c589b",
+    "type": 1,
+    "text": "I will destroy the omniverse, and nobody can stop me!",
+    "char": "",
+    "tail": "f4ab0d53ef",
+    "posx": 457,
+    "posy": 792,
+    "data": {
+
+    }
+  },
+  "f4ab0d53ef": {
+    "key": "f4ab0d53ef",
+    "type": 1,
+    "text": "Uh-oh. You don't know who this Steve person is, but you certainly don't want him destroying the omniverse.",
+    "char": ".",
+    "tail": "377506d202",
+    "posx": 457,
+    "posy": 1392,
+    "data": {
+
+    }
+  },
+  "1b6a5d592c": {
+    "key": "1b6a5d592c",
+    "type": 4,
+    "text": "",
+    "char": "",
+    "tail": "",
+    "posx": 444,
+    "posy": 2622,
+    "data": {
+      "tail_count": 2,
+      "tails": [
+        "4a3981d8cb",
+        "df7f912549",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "choices": [
+        "Tell Steve to stop",
+        "Don't tell Steve to stop",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "df7f912549": {
+    "key": "df7f912549",
+    "type": 1,
+    "text": "You decide to not do anything.",
+    "char": ".",
+    "tail": "190305b848",
+    "posx": 1158,
+    "posy": 2655,
+    "data": {
+
+    }
+  },
+  "190305b848": {
+    "key": "190305b848",
+    "type": 1,
+    "text": "Clearly, this isn't working.",
+    "char": "",
+    "tail": "377506d202",
+    "posx": 1607,
+    "posy": 1998,
+    "data": {
+
+    }
+  },
+  "377506d202": {
+    "key": "377506d202",
+    "type": 1,
+    "text": "What will you do?",
+    "char": "",
+    "tail": "1b6a5d592c",
+    "posx": 454,
+    "posy": 1989,
+    "data": {
+
+    }
+  },
+  "4a3981d8cb": {
+    "key": "4a3981d8cb",
+    "type": 1,
+    "text": "You tell Steve to stop.",
+    "char": ".",
+    "tail": "c2447e58ee",
+    "posx": 77,
+    "posy": 2657,
+    "data": {
+
+    }
+  },
+  "12a990d162": {
+    "key": "12a990d162",
+    "type": 1,
+    "text": "Mwahahahahahaha...",
+    "char": "Steve",
+    "tail": "821b9c589b",
+    "posx": 457,
+    "posy": 192,
+    "data": {
+      "Background": "black",
+      "Music": "tocatta-and-fugue-in-d-minor.ogg",
+      "Character Portrait": "laughing"
+    }
+  },
+  "c2447e58ee": {
+    "key": "c2447e58ee",
+    "type": 1,
+    "text": "You fool! ",
+    "char": "Steve",
+    "tail": "6f64342d7c",
+    "posx": 77,
+    "posy": 3257,
+    "data": {
+      "Character Portrait": "angry"
+    }
+  },
+  "6f64342d7c": {
+    "key": "6f64342d7c",
+    "type": 1,
+    "text": "I am Steve, and I will do whatever I want.",
+    "char": "",
+    "tail": "87fc4fc87f",
+    "posx": 77,
+    "posy": 3857,
+    "data": {
+
+    }
+  },
+  "87fc4fc87f": {
+    "key": "87fc4fc87f",
+    "type": 1,
+    "text": "As long as I have access to the 14 Chaos Emeralds, nothing will stand between me and the destruction of the omniverse!",
+    "char": "",
+    "tail": "d9ca2b6fac",
+    "posx": 77,
+    "posy": 4457,
+    "data": {
+
+    }
+  },
+  "d9ca2b6fac": {
+    "key": "d9ca2b6fac",
+    "type": 1,
+    "text": "This isn't good. What do you do?",
+    "char": ".",
+    "tail": "8a29978ce6",
+    "posx": 65,
+    "posy": 5048,
+    "data": {
+
+    }
+  },
+  "8a29978ce6": {
+    "key": "8a29978ce6",
+    "type": 4,
+    "text": "",
+    "char": "",
+    "tail": "",
+    "posx": 62,
+    "posy": 5601,
+    "data": {
+      "tail_count": 4,
+      "tails": [
+        "6d2831a04d",
+        "fe741022f4",
+        "c7aec149bd",
+        "3771478e12",
+        "",
+        ""
+      ],
+      "choices": [
+        "Bake a cake for Steve",
+        "Tell Steve that destroying the omniverse is not very nice",
+        "Tell Steve that you also plan to destroy the omniverse",
+        "Do nothing",
+        "",
+        ""
+      ]
+    }
+  },
+  "3771478e12": {
+    "key": "3771478e12",
+    "type": 1,
+    "text": "You do nothing.",
+    "char": ".",
+    "tail": "4bcf91f8a4",
+    "posx": 1480,
+    "posy": 6009,
+    "data": {
+      "Command": "karma - 1"
+    }
+  },
+  "4bcf91f8a4": {
+    "key": "4bcf91f8a4",
+    "type": 1,
+    "text": "Steve ends up destroying the omniverse.",
+    "char": "",
+    "tail": "eaa59f7983",
+    "posx": 1480,
+    "posy": 6609,
+    "data": {
+
+    }
+  },
+  "eaa59f7983": {
+    "key": "eaa59f7983",
+    "type": 1,
+    "text": "Game over.",
+    "char": "",
+    "tail": "",
+    "posx": 820,
+    "posy": 7364,
+    "data": {
+
+    }
+  },
+  "ffc1ee3cfe": {
+    "key": "ffc1ee3cfe",
+    "type": 1,
+    "text": "You get so caught up in your explanation of how you're going to destroy the omniverse that you actually destroy the omniverse.",
+    "char": "",
+    "tail": "eaa59f7983",
+    "posx": 345,
+    "posy": 6690,
+    "data": {
+
+    }
+  },
+  "0448c47d74": {
+    "key": "0448c47d74",
+    "type": 1,
+    "text": "Surprise - I'm not actually a cake...",
+    "char": "The Cake",
+    "tail": "e46debcbfd",
+    "posx": -685,
+    "posy": 6595,
+    "data": {
+      "Character Portrait": "cake"
+    }
+  },
+  "2d25de9e48": {
+    "key": "2d25de9e48",
+    "type": 1,
+    "text": "The bomb explodes and kills Steve before he can destroy the omniverse.",
+    "char": ".",
+    "tail": "329b516214",
+    "posx": -1119,
+    "posy": 8409,
+    "data": {
+      "Character Portrait": "steve/dead"
+    }
+  },
+  "86617e3aef": {
+    "key": "86617e3aef",
+    "type": 1,
+    "text": "Noooo!",
+    "char": "Steve",
+    "tail": "2d25de9e48",
+    "posx": -1055,
+    "posy": 7811,
+    "data": {
+      "Character Portrait": "scared"
+    }
+  },
+  "329b516214": {
+    "key": "329b516214",
+    "type": 1,
+    "text": "You win!",
+    "char": "",
+    "tail": "",
+    "posx": -1128,
+    "posy": 9009,
+    "data": {
+      "Command": "playsound(tada)"
+    }
+  },
+  "e46debcbfd": {
+    "key": "e46debcbfd",
+    "type": 1,
+    "text": "I'm a bomb!",
+    "char": "A bomb",
+    "tail": "86617e3aef",
+    "posx": -864,
+    "posy": 7211,
+    "data": {
+      "Character Portrait": "bomb",
+      "Command": "sound(dundundun)"
+    }
+  },
+  "6d2831a04d": {
+    "key": "6d2831a04d",
+    "type": 1,
+    "text": "Aww, how nice of you to bake a cake for me!",
+    "char": "Steve",
+    "tail": "0448c47d74",
+    "posx": -685,
+    "posy": 5995,
+    "data": {
+      "Command": "karma + 99"
+    }
+  },
+  "c7aec149bd": {
+    "key": "c7aec149bd",
+    "type": 1,
+    "text": "You tell Steve that you also plan to destroy the omniverse.",
+    "char": ".",
+    "tail": "ffc1ee3cfe",
+    "posx": 345,
+    "posy": 6090,
+    "data": {
+      "Command": "karma - 1"
+    }
+  },
+  "Sample Project": {
+    "key": "Sample Project",
+    "type": 2,
+    "text": "",
+    "char": "",
+    "tail": "",
+    "posx": -387,
+    "posy": -488,
+    "data": {
+
+    }
+  },
+  "54bf717cee": {
+    "key": "54bf717cee",
+    "type": 1,
+    "text": "[center][color=green] April 20th 2128\nUnknown Location\n12:00 am\n[/color][/center]\n",
+    "char": "-",
+    "tail": "12a990d162",
+    "posx": 454,
+    "posy": -339,
+    "data": {
+
+    }
+  },
+  "Bad ending": {
+    "key": "Bad ending",
+    "type": 2,
+    "text": "",
+    "char": "",
+    "tail": "",
+    "posx": 2018,
+    "posy": 7541,
+    "data": {
+
+    }
+  },
+  "True ending": {
+    "key": "True ending",
+    "type": 2,
+    "text": "",
+    "char": "",
+    "tail": "",
+    "posx": -2247,
+    "posy": 8971,
+    "data": {
+
+    }
+  },
+  "fe741022f4": {
+    "key": "fe741022f4",
+    "type": 1,
+    "text": "Like that's going to get you anywhere.",
+    "char": ".",
+    "tail": "d9ca2b6fac",
+    "posx": -903,
+    "posy": 5118,
+    "data": {
+
+    }
+  }
+}

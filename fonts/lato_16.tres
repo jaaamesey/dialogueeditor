@@ -1,0 +1,16 @@
+[gd_resource type="DynamicFont" load_steps=3 format=2]
+
+[ext_resource path="res://fonts/NotoSans-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/Lato-Regular.ttf" type="DynamicFontData" id=2]
+
+[resource]
+
+size = 16
+outline_size = 0
+outline_color = Color( 0, 0, 0, 0.670588 )
+use_mipmaps = true
+use_filter = false
+font_data = ExtResource( 2 )
+fallback/0 = ExtResource( 1 )
+_sections_unfolded = [ "Extra Spacing", "Fallback", "Font", "Resource", "Settings", "fallback", "font_data" ]
+

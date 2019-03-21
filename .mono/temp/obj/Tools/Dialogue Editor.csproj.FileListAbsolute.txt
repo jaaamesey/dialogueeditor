@@ -1,0 +1,5 @@
+C:\Users\Jamie\Desktop\dialogueeditor\.mono\temp\bin\Tools\Dialogue Editor.dll
+C:\Users\Jamie\Desktop\dialogueeditor\.mono\temp\bin\Tools\Dialogue Editor.pdb
+C:\Users\Jamie\Desktop\dialogueeditor\.mono\temp\obj\Tools\Dialogue Editor.csprojResolveAssemblyReference.cache
+C:\Users\Jamie\Desktop\dialogueeditor\.mono\temp\obj\Tools\Dialogue Editor.dll
+C:\Users\Jamie\Desktop\dialogueeditor\.mono\temp\obj\Tools\Dialogue Editor.pdb

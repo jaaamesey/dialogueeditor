@@ -1,0 +1,908 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://src/dialogue_editor/dialogue_editor.gd" type="Script" id=1]
+[ext_resource path="res://src/dialogue_editor/map.gd" type="Script" id=2]
+[ext_resource path="res://src/dialogue_editor/GridBG.gd" type="Script" id=3]
+[ext_resource path="res://src/dialogue_editor/SelectionRect.gd" type="Script" id=4]
+[ext_resource path="res://themes/default_theme.tres" type="Theme" id=5]
+[ext_resource path="res://src/dialogue_editor/SampleNinePatchRect.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/dialogue_editor/ProjectWindow.gd" type="Script" id=7]
+[ext_resource path="res://src/dialogue_editor/OptionsWindow.gd" type="Script" id=8]
+[ext_resource path="res://fonts/UI_default.tres" type="DynamicFont" id=9]
+[ext_resource path="res://fonts/UI_16.tres" type="DynamicFont" id=10]
+[ext_resource path="res://src/dialogue_editor/accent_hue_controller.gd" type="Script" id=11]
+[ext_resource path="res://src/dialogue_editor/save.gd" type="Script" id=12]
+[ext_resource path="res://src/dialogue_editor/OptionsButton.gd" type="Script" id=13]
+[ext_resource path="res://src/dialogue_editor/VScrollBar.gd" type="Script" id=14]
+[ext_resource path="res://fonts/UI_20.tres" type="DynamicFont" id=15]
+[ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=16]
+[ext_resource path="res://sprites/backgrounds/bg2.jpg" type="Texture" id=17]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 1.76088
+
+[sub_resource type="InputEventKey" id=2]
+
+device = 0
+alt = false
+shift = false
+control = true
+meta = false
+command = true
+pressed = false
+scancode = 78
+unicode = 0
+echo = false
+
+[sub_resource type="ShortCut" id=3]
+
+shortcut = SubResource( 2 )
+_sections_unfolded = [ "shortcut" ]
+
+[sub_resource type="InputEventKey" id=4]
+
+device = 0
+alt = false
+shift = false
+control = true
+meta = false
+command = true
+pressed = false
+scancode = 79
+unicode = 0
+echo = false
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="ShortCut" id=5]
+
+shortcut = SubResource( 4 )
+_sections_unfolded = [ "Resource", "shortcut" ]
+
+[sub_resource type="Theme" id=6]
+
+default_font = ExtResource( 10 )
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="InputEventKey" id=7]
+
+device = 0
+alt = false
+shift = false
+control = true
+meta = false
+command = true
+pressed = false
+scancode = 83
+unicode = 0
+echo = false
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="ShortCut" id=8]
+
+shortcut = SubResource( 7 )
+_sections_unfolded = [ "Resource", "shortcut" ]
+
+[sub_resource type="InputEventKey" id=9]
+
+device = 0
+alt = false
+shift = true
+control = true
+meta = false
+command = true
+pressed = false
+scancode = 83
+unicode = 0
+echo = false
+
+[sub_resource type="ShortCut" id=10]
+
+shortcut = SubResource( 9 )
+_sections_unfolded = [ "shortcut" ]
+
+[sub_resource type="InputEventKey" id=11]
+
+device = 0
+alt = false
+shift = false
+control = true
+meta = false
+command = true
+pressed = false
+scancode = 70
+unicode = 0
+echo = false
+
+[sub_resource type="ShortCut" id=12]
+
+shortcut = SubResource( 11 )
+_sections_unfolded = [ "shortcut" ]
+
+[node name="DialogueEditor" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Map" type="Node2D" parent="."]
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="GridBG" type="Node2D" parent="Map"]
+script = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Blocks" type="Node2D" parent="Map"]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="SelectionRect" type="Node2D" parent="Map"]
+script = ExtResource( 4 )
+
+[node name="Cursor" type="Node2D" parent="Map"]
+
+[node name="Area2D" type="Area2D" parent="Map/Cursor"]
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Cursor/Area2D"]
+shape = SubResource( 1 )
+
+[node name="FrontWindows" type="CanvasLayer" parent="."]
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Inspector" type="PopupPanel" parent="FrontWindows"]
+visible = false
+self_modulate = Color( 0, 0, 0, 0 )
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -249.0
+margin_top = 36.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 5 )
+popup_exclusive = false
+_sections_unfolded = [ "Rect", "Theme", "Visibility" ]
+
+[node name="NinePatchRect" parent="FrontWindows/Inspector" instance=ExtResource( 6 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 868.0
+margin_bottom = 2071.0
+
+[node name="ProjectWindow" type="Control" parent="FrontWindows"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 5 )
+script = ExtResource( 7 )
+_sections_unfolded = [ "Hint", "theme" ]
+
+[node name="Panel" type="WindowDialog" parent="FrontWindows/ProjectWindow"]
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -299.0
+margin_top = -177.0
+margin_right = 338.0
+margin_bottom = 217.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 5 )
+popup_exclusive = false
+window_title = "Project Settings"
+resizable = false
+_sections_unfolded = [ "Custom Constants", "Custom Styles", "Popup", "Theme", "Visibility", "theme" ]
+
+[node name="OptionsWindow" type="WindowDialog" parent="FrontWindows"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -229.0
+margin_top = -203.0
+margin_right = 230.0
+margin_bottom = 203.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 5 )
+popup_exclusive = false
+window_title = "Options"
+resizable = false
+script = ExtResource( 8 )
+_sections_unfolded = [ "Custom Styles", "Margin", "Material", "Popup", "Theme", "Visibility" ]
+
+[node name="GridContainer" type="GridContainer" parent="FrontWindows/OptionsWindow"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -213.5
+margin_top = -192.5
+margin_right = 213.5
+margin_bottom = 192.5
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+columns = 2
+
+[node name="ScrollSpeedLabel" type="Label" parent="FrontWindows/OptionsWindow/GridContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 223.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "SCROLL SPEED: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Custom Colors", "Custom Fonts", "Size Flags" ]
+
+[node name="ScrollSpeedSlider" type="HSlider" parent="FrontWindows/OptionsWindow/GridContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 227.0
+margin_right = 427.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 200, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+min_value = 0.0
+max_value = 1000.0
+step = 10.0
+page = 0.0
+value = 100.0
+exp_edit = false
+rounded = true
+allow_greater = false
+allow_lesser = false
+editable = true
+scrollable = true
+tick_count = 0
+ticks_on_borders = true
+focus_mode = 0
+_sections_unfolded = [ "Anchor", "Hint", "Margin", "Mouse", "Rect", "Size Flags" ]
+
+[node name="ZoomSpeedLabel" type="Label" parent="FrontWindows/OptionsWindow/GridContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 27.0
+margin_right = 223.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "ZOOM SPEED: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Custom Colors", "Custom Fonts", "Size Flags" ]
+
+[node name="ZoomSpeedSlider" type="HSlider" parent="FrontWindows/OptionsWindow/GridContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 227.0
+margin_top = 27.0
+margin_right = 427.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 200, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+min_value = 1.0
+max_value = 2.0
+step = 0.1
+page = 0.0
+value = 1.2
+exp_edit = true
+rounded = false
+allow_greater = false
+allow_lesser = false
+editable = true
+scrollable = true
+tick_count = 0
+ticks_on_borders = true
+focus_mode = 0
+_sections_unfolded = [ "Anchor", "Hint", "Margin", "Mouse", "Rect", "Size Flags" ]
+
+[node name="EditorHue" type="Label" parent="FrontWindows/OptionsWindow/GridContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 54.0
+margin_right = 223.0
+margin_bottom = 77.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "EDITOR HUE: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Custom Colors", "Custom Fonts", "Size Flags" ]
+
+[node name="EditorHueSlider" type="HSlider" parent="FrontWindows/OptionsWindow/GridContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 227.0
+margin_top = 54.0
+margin_right = 427.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 200, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+min_value = 1.0
+max_value = 2.0
+step = 0.1
+page = 0.0
+value = 1.2
+exp_edit = true
+rounded = false
+allow_greater = false
+allow_lesser = false
+editable = true
+scrollable = true
+tick_count = 0
+ticks_on_borders = true
+focus_mode = 0
+_sections_unfolded = [ "Anchor", "Hint", "Margin", "Mouse", "Rect", "Size Flags" ]
+
+[node name="FindWindow" type="AcceptDialog" parent="FrontWindows"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -112.0
+margin_top = -61.0
+margin_right = 112.0
+margin_bottom = 19.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 5 )
+popup_exclusive = false
+window_title = "Find"
+resizable = false
+dialog_hide_on_ok = true
+_sections_unfolded = [ "Custom Fonts", "Custom Icons", "Theme", "theme" ]
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="FrontWindows/FindWindow"]
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -104.0
+margin_top = 8.0
+margin_right = 104.0
+margin_bottom = 35.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 1
+
+[node name="Label" type="Label" parent="FrontWindows/FindWindow/HBoxContainer2"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 10.0
+margin_top = 2.0
+margin_right = 35.0
+margin_bottom = 25.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 10 )
+text = "ID: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Custom Fonts", "Theme" ]
+
+[node name="LineEdit" type="LineEdit" parent="FrontWindows/FindWindow/HBoxContainer2"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 39.0
+margin_right = 198.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 159.32, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 1
+size_flags_vertical = 4
+theme = ExtResource( 5 )
+secret_character = "*"
+focus_mode = 2
+context_menu_enabled = true
+clear_button_enabled = false
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+caret_position = 0
+_sections_unfolded = [ "Rect", "Size Flags", "Theme", "theme" ]
+
+[node name="OpenFileWindow" type="FileDialog" parent="FrontWindows"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -503.0
+margin_top = -281.0
+margin_right = 506.0
+margin_bottom = 313.0
+rect_min_size = Vector2( 200, 70 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 5 )
+popup_exclusive = false
+window_title = "Open a File"
+resizable = true
+dialog_hide_on_ok = false
+mode_overrides_title = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.poopliga" )
+show_hidden_files = true
+current_dir = "C:/Users/Jamie/Desktop/poopliga"
+current_file = ""
+current_path = "C:/Users/Jamie/Desktop/poopliga/"
+_sections_unfolded = [ "Dialog", "Theme", "filters" ]
+
+[node name="FrontUILayer" type="CanvasLayer" parent="."]
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="ColorRectBG2" type="ColorRect" parent="FrontUILayer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_bottom = 36.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 1 )
+_sections_unfolded = [ "Material", "Rect", "Theme", "Visibility", "material" ]
+
+[node name="AccentLine" type="ColorRect" parent="FrontUILayer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_bottom = 35.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.117647, 0.490196, 0.65098, 1 )
+script = ExtResource( 11 )
+_sections_unfolded = [ "Material", "Rect", "Theme", "Visibility", "material" ]
+
+[node name="ColorRect" type="ColorRect" parent="FrontUILayer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_bottom = 33.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.00335693, 0.029139, 0.078125, 1 )
+_sections_unfolded = [ "Material", "Rect", "Theme", "Visibility", "material" ]
+
+[node name="LeftHBoxContainer" type="HBoxContainer" parent="FrontUILayer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.63
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 1.0
+margin_right = -314.0
+margin_bottom = 33.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_constants" ]
+
+[node name="New" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 46.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Creates a new empty file."
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 0
+shortcut = SubResource( 3 )
+group = null
+text = "New"
+flat = true
+align = 1
+_sections_unfolded = [ "Custom Fonts", "Focus", "Hint", "Mouse", "custom_fonts/font", "shortcut" ]
+
+[node name="Open" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 50.0
+margin_right = 104.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Opens a previously saved file."
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 0
+shortcut = SubResource( 5 )
+group = null
+text = "Open"
+flat = true
+align = 1
+_sections_unfolded = [ "Custom Fonts", "Custom Styles" ]
+
+[node name="Save" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 108.0
+margin_right = 155.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Saves the current file to disk, overwriting the previously opened file.
+"
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = SubResource( 6 )
+toggle_mode = false
+enabled_focus_mode = 0
+shortcut = SubResource( 8 )
+group = null
+text = "Save"
+flat = true
+align = 1
+script = ExtResource( 12 )
+_sections_unfolded = [ "Custom Constants", "Custom Fonts", "Theme", "Visibility", "custom_styles/normal", "theme" ]
+
+[node name="SaveAs" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 159.0
+margin_right = 227.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Saves the current file to a specified location."
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 0
+shortcut = SubResource( 10 )
+group = null
+text = "Save as"
+flat = true
+align = 1
+_sections_unfolded = [ "Custom Fonts", "Hint", "shortcut" ]
+
+[node name="Find" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 231.0
+margin_right = 275.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Search for a specific block."
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 0
+shortcut = SubResource( 12 )
+group = null
+text = "Find"
+flat = true
+align = 1
+_sections_unfolded = [ "Anchor", "Custom Fonts", "Grow Direction", "Hint", "Margin", "shortcut" ]
+
+[node name="Project" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 279.0
+margin_right = 345.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Open project menu."
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 0
+shortcut = null
+group = null
+text = "Project"
+flat = true
+align = 1
+_sections_unfolded = [ "Anchor", "Custom Fonts", "Grow Direction", "Hint", "Margin" ]
+
+[node name="Options" type="Button" parent="FrontUILayer/LeftHBoxContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 349.0
+margin_right = 422.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Open options menu."
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 0
+shortcut = null
+group = null
+text = "Options"
+flat = true
+align = 1
+script = ExtResource( 13 )
+_sections_unfolded = [ "Anchor", "Custom Fonts", "Grow Direction", "Hint", "Margin" ]
+
+[node name="VScrollBar" type="VScrollBar" parent="FrontUILayer"]
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -12.0
+margin_top = 36.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource( 5 )
+min_value = 0.0
+max_value = 100.0
+step = 0.0
+page = 0.0
+value = 0.0
+exp_edit = false
+rounded = false
+allow_greater = false
+allow_lesser = false
+custom_step = -1.0
+script = ExtResource( 14 )
+_sections_unfolded = [ "Custom Icons", "Focus", "Hint", "Rect", "Theme" ]
+
+[node name="Label" type="Label" parent="FrontUILayer/VScrollBar"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -201.0
+margin_top = -53.0
+margin_right = -20.0
+margin_bottom = -17.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "(0,0)"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Custom Fonts", "custom_colors", "custom_constants", "custom_fonts", "custom_fonts/font", "custom_styles" ]
+
+[node name="BackUILayer" type="CanvasLayer" parent="."]
+layer = -99
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="BackUIButton" type="Button" parent="BackUILayer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -47.0
+margin_right = 78.0
+margin_bottom = 58.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 5 )
+toggle_mode = false
+action_mode = 0
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = true
+align = 1
+_sections_unfolded = [ "Anchor", "Rect" ]
+
+[node name="BGLayer" type="CanvasLayer" parent="."]
+layer = -100
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Background" parent="BGLayer" instance=ExtResource( 16 )]
+modulate = Color( 0.835294, 0.905882, 1, 1 )
+texture = ExtResource( 17 )
+_sections_unfolded = [ "Material", "Size Flags", "Theme", "Visibility", "texture" ]
+
+[connection signal="confirmed" from="FrontWindows/FindWindow" to="." method="_on_FindWindow_confirmed"]
+[connection signal="file_selected" from="FrontWindows/OpenFileWindow" to="." method="_on_OpenFileWindow_file_selected"]
+[connection signal="popup_hide" from="FrontWindows/OpenFileWindow" to="." method="_on_OpenFileWindow_popup_hide"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Open" to="." method="_on_Open_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Save" to="FrontUILayer/LeftHBoxContainer/Save" method="_on_Save_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Find" to="." method="_on_Find_pressed"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Project" to="FrontWindows/ProjectWindow" method="_on_Project_pressed"]
+[connection signal="toggled" from="FrontUILayer/LeftHBoxContainer/Project" to="FrontWindows/ProjectWindow" method="_on_Project_toggled"]
+[connection signal="pressed" from="FrontUILayer/LeftHBoxContainer/Options" to="FrontWindows/OptionsWindow" method="_on_Options_pressed"]
+[connection signal="toggled" from="FrontUILayer/LeftHBoxContainer/Options" to="FrontWindows/OptionsWindow" method="_on_Options_toggled"]
+[connection signal="pressed" from="BackUILayer/BackUIButton" to="." method="_on_BackUIButton_pressed"]

@@ -1,0 +1,15 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://fonts/Lato-Regular.ttf" type="DynamicFontData" id=1]
+
+[resource]
+
+size = 27
+outline_size = 0
+outline_color = Color( 0.0819397, 0.250727, 0.699219, 0.694431 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_bottom = 2
+font_data = ExtResource( 1 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Resource", "Settings", "fallback", "font_data" ]
+

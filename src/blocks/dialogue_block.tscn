@@ -1,0 +1,279 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://src/blocks/dialogue_block.gd" type="Script" id=1]
+[ext_resource path="res://sprites/dialogue/ninepatch2.png" type="Texture" id=2]
+[ext_resource path="res://sprites/icons/unfilled_circle_thick.png" type="Texture" id=3]
+[ext_resource path="res://themes/default_theme.tres" type="Theme" id=4]
+[ext_resource path="res://fonts/UI_20.tres" type="DynamicFont" id=5]
+[ext_resource path="res://sprites/icons/trash_small.png" type="Texture" id=6]
+[ext_resource path="res://sprites/icons/trash_open_small.png" type="Texture" id=7]
+[ext_resource path="res://src/title_bar_button_hover.gd" type="Script" id=8]
+[ext_resource path="res://src/blocks/dialogue_boxes/black_serif.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/blocks/dialogue_boxes/swappable_dialogue_box.gd" type="Script" id=10]
+[ext_resource path="res://fonts/hack_largeish.tres" type="DynamicFont" id=11]
+[ext_resource path="res://sprites/icons/connector_small_unfilled.png" type="Texture" id=12]
+[ext_resource path="res://snd/boop.ogg" type="AudioStream" id=13]
+[ext_resource path="res://src/random_pitch_sound.gd" type="Script" id=14]
+[ext_resource path="res://src/blocks/dialogue_block_line_draw.gd" type="Script" id=15]
+
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 0.231373 )
+
+[sub_resource type="Animation" id=5]
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 2.78, 0.73, 0.78, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.01, 0.01 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( -0.1, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 20, 34.45, 74.95, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 385.447, 239.449 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 21.0916, 17.0142 )
+
+[node name="DialogueBlock" type="Control" groups=[
+"dialogue_block",
+]]
+use_parent_material = true
+script = ExtResource( 1 )
+node_type = 1
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0, 237.164 )
+scale = Vector2( 39.0916, 24.2108 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -385.0
+margin_right = 388.0
+margin_bottom = 472.0
+focus_mode = 1
+mouse_filter = 1
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 256, 256 )
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
+
+[node name="Button" type="Button" parent="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 1.0
+custom_styles/focus = SubResource( 1 )
+flat = true
+
+[node name="TitleBar" type="Control" parent="NinePatchRect"]
+anchor_right = 1.0
+
+[node name="HeadConnector" type="TextureButton" parent="NinePatchRect/TitleBar"]
+modulate = Color( 0.333333, 0.333333, 0.333333, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -12.0
+margin_top = 5.0
+margin_right = 8.0
+margin_bottom = 25.0
+mouse_filter = 2
+disabled = true
+texture_normal = ExtResource( 3 )
+expand = true
+
+[node name="DraggableSegment" type="Button" parent="NinePatchRect/TitleBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -10.0
+margin_bottom = 48.0
+focus_mode = 0
+theme = ExtResource( 4 )
+custom_styles/focus = SubResource( 2 )
+action_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Id_Label" type="LineEdit" parent="NinePatchRect/TitleBar"]
+margin_left = 7.0
+margin_top = 1.0
+margin_right = 129.0
+margin_bottom = 26.0
+focus_next = NodePath("../../Dialogue/CharacterLineEdit")
+focus_mode = 1
+mouse_filter = 1
+theme = ExtResource( 4 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.639216, 0.639216, 0.639216, 1 )
+max_length = 10
+expand_to_text_length = true
+focus_mode = 1
+context_menu_enabled = false
+placeholder_text = "ID"
+caret_blink = true
+
+[node name="DeleteButton" type="TextureButton" parent="NinePatchRect"]
+modulate = Color( 0.639216, 0.639216, 0.639216, 1 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -28.0
+margin_top = 3.0
+margin_right = -4.0
+margin_bottom = 27.0
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 6 )
+expand = true
+script = ExtResource( 8 )
+
+[node name="Dialogue" parent="NinePatchRect" instance=ExtResource( 9 )]
+script = ExtResource( 10 )
+
+[node name="Button" parent="NinePatchRect/Dialogue" index="0"]
+margin_left = -229.0
+margin_top = 72.0
+margin_right = 543.0
+margin_bottom = 435.0
+
+[node name="CharacterLineEdit" parent="NinePatchRect/Dialogue" index="2"]
+focus_next = NodePath("../../DialogueTextEdit")
+focus_previous = NodePath("../../TitleBar/Id_Label")
+placeholder_alpha = 0.4
+
+[node name="DialogueRichTextLabel" parent="NinePatchRect/Dialogue" index="3"]
+mouse_filter = 2
+
+[node name="DialogueTextEdit" type="TextEdit" parent="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 266.0
+margin_right = -13.0
+margin_bottom = -40.0
+focus_previous = NodePath("../Dialogue/CharacterLineEdit")
+focus_mode = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 11 )
+custom_constants/line_spacing = 0
+context_menu_enabled = false
+wrap_enabled = true
+caret_blink = true
+
+[node name="TailConnector" type="TextureButton" parent="NinePatchRect"]
+modulate = Color( 1, 1, 1, 0.321569 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -32.0
+margin_top = -28.0
+margin_right = 27.0
+margin_bottom = -3.0
+mouse_filter = 1
+action_mode = 0
+texture_normal = ExtResource( 12 )
+expand = true
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spawn"
+anims/kill = SubResource( 5 )
+anims/spawn = SubResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+script = ExtResource( 14 )
+
+[node name="Area2D" type="Area2D" parent="."]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 236.58 )
+shape = SubResource( 7 )
+
+[node name="LineDrawNode" type="Node2D" parent="."]
+position = Vector2( 0, 310 )
+z_index = 4
+script = ExtResource( 15 )
+
+[node name="HeadArea2D" type="Area2D" parent="."]
+position = Vector2( -10, 7.626 )
+priority = 13.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadArea2D"]
+position = Vector2( 10.0826, 6.46904 )
+shape = SubResource( 8 )
+
+[connection signal="focus_entered" from="NinePatchRect" to="." method="_on_NinePatchRect_focus_entered"]
+[connection signal="button_down" from="NinePatchRect/Button" to="." method="_on_Button_button_down"]
+[connection signal="mouse_entered" from="NinePatchRect/TitleBar/DraggableSegment" to="." method="_on_DraggableSegment_mouse_entered"]
+[connection signal="mouse_exited" from="NinePatchRect/TitleBar/DraggableSegment" to="." method="_on_DraggableSegment_mouse_exited"]
+[connection signal="pressed" from="NinePatchRect/TitleBar/DraggableSegment" to="." method="_on_DraggableSegment_pressed"]
+[connection signal="focus_exited" from="NinePatchRect/TitleBar/Id_Label" to="." method="_on_Id_Label_focus_exited"]
+[connection signal="text_changed" from="NinePatchRect/TitleBar/Id_Label" to="." method="_on_Id_Label_text_changed"]
+[connection signal="text_entered" from="NinePatchRect/TitleBar/Id_Label" to="." method="_on_Id_Label_text_entered"]
+[connection signal="button_down" from="NinePatchRect/DeleteButton" to="." method="_on_DeleteButton_button_down"]
+[connection signal="pressed" from="NinePatchRect/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="button_down" from="NinePatchRect/Dialogue/Button" to="." method="_on_Button_button_down"]
+[connection signal="focus_exited" from="NinePatchRect/Dialogue/CharacterLineEdit" to="NinePatchRect/Dialogue" method="_on_CharacterLineEdit_focus_exited"]
+[connection signal="text_changed" from="NinePatchRect/Dialogue/CharacterLineEdit" to="." method="_on_CharacterLineEdit_text_changed"]
+[connection signal="gui_input" from="NinePatchRect/Dialogue/DialogueRichTextLabel" to="." method="_on_DialogueRichTextLabel_gui_input"]
+[connection signal="meta_clicked" from="NinePatchRect/Dialogue/DialogueRichTextLabel" to="." method="_on_DialogueRichTextLabel_meta_clicked"]
+[connection signal="cursor_changed" from="NinePatchRect/DialogueTextEdit" to="." method="_on_DialogueTextEdit_cursor_changed"]
+[connection signal="focus_entered" from="NinePatchRect/DialogueTextEdit" to="." method="_on_DialogueTextEdit_focus_entered"]
+[connection signal="button_down" from="NinePatchRect/TailConnector" to="." method="_on_TailConnector_button_down"]
+[connection signal="button_up" from="NinePatchRect/TailConnector" to="." method="_on_TailConnector_button_up"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="area_entered" from="HeadArea2D" to="." method="_on_HeadArea2D_area_entered"]
+[connection signal="area_exited" from="HeadArea2D" to="." method="_on_HeadArea2D_area_exited"]
+
+[editable path="NinePatchRect/Dialogue"]
